@@ -12,7 +12,7 @@ const schema = defineSchema({
     authorId: v.id("users"),
     image: v.optional(v.id("_storage")),
     imageUrl: v.optional(v.string()),
-    updatedAt: v.optional(v.string()),
+    updatedAt: v.optional(v.number()),
   }),
   usersBlogsInteractions: defineTable({
     userId: v.id("users"),

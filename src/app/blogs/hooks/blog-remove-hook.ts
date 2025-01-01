@@ -5,10 +5,6 @@ import { api } from "../../../../convex/_generated/api";
 
 type RequestType = {
   blogId: Id<"blogs">;
-  name: string;
-  content: string;
-  image?: Id<"_storage">;
-  imageUrl?: string;
 };
 type ResponseType = Id<"blogs"> | null;
 
@@ -19,7 +15,7 @@ type Options = {
   throwError?: boolean;
 };
 
-export const UseUpdateBlogHook = () => {
+export const UseRemoveBlogHook = () => {
   const [id, setId] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<
@@ -30,7 +26,7 @@ export const UseUpdateBlogHook = () => {
   const isError = useMemo(() => status === "error", [status]);
   const isSettled = useMemo(() => status === "settled", [status]);
 
-  const mutation = useMutation(api.blogs.updateBlog);
+  const mutation = useMutation(api.blogs.removeBlog);
 
   const mutate = useCallback(
     async (values: RequestType, options?: Options) => {

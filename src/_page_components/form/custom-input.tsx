@@ -4,6 +4,7 @@ import {
   Control,
   FieldPath,
   FieldValues,
+  PathValue,
   useController,
 } from "react-hook-form";
 import {
@@ -25,6 +26,8 @@ interface CustomInputProps<T extends FieldValues> {
   disabled?: boolean;
   className?: string;
   error?: string;
+  defaultValue?: PathValue<T, FieldPath<T>>;
+
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
 }
 
@@ -38,11 +41,12 @@ export default function CustomInput<T extends FieldValues>({
   label,
   control,
   onChange,
+  defaultValue,
 }: Readonly<CustomInputProps<T>>) {
   const {
     field,
     fieldState: { error: fieldError },
-  } = useController({ name, control });
+  } = useController({ name, control, defaultValue });
 
   return (
     <FormItem className="relative">

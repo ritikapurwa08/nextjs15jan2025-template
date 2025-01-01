@@ -39,12 +39,7 @@ const SignOutButton = () => {
   }
 
   return (
-    <Button
-      onClick={handleSignOut}
-      disabled={isSigningOut || isAuthLoading}
-      variant="outline"
-      size="lg"
-    >
+    <button onClick={handleSignOut} disabled={isSigningOut || isAuthLoading}>
       {isSigningOut ? (
         <span className="flex flex-row items-center justify-center gap-2">
           <Loader2Icon className="h-4 w-4 animate-spin" />
@@ -56,7 +51,7 @@ const SignOutButton = () => {
           Sign Out
         </span>
       )}
-    </Button>
+    </button>
   );
 };
 

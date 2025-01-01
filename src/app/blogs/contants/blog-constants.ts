@@ -5,7 +5,7 @@ import { z } from "zod";
 export const blogZodSchema = z.object({
   name: z.string().min(1),
   content: z.string().min(1),
-  imageUrl: z.string().optional(),
+  imageUrl: z.string().url("Invalid Url Formats").optional(),
 });
 
 export type BlogSchemaZodType = z.infer<typeof blogZodSchema>;

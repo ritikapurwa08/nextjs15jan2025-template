@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 
 // ... (imports)
@@ -71,11 +71,12 @@ export const updateBlog = mutation({
       content: args.content,
       image: args.image,
       imageUrl: args.imageUrl,
-      updatedAt: Date.now().toString(), // Store as numerical timestamp (string)
+      updatedAt: Date.now(), // Store as numerical timestamp (string)
     });
     return updatedBlog;
   },
 });
+
 export const removeBlog = mutation({
   args: {
     blogId: v.id("blogs"),
@@ -110,4 +111,21 @@ export const removeBlog = mutation({
   },
 });
 
-export const getBlogById = () => {};
+export const getBlogById = query({
+  args: {
+    blogId: v.id("blogs"),
+  },
+  handler: async (ctx, args) => {
+    const blog = await ctx.db.get(args.blogId);
+    return blog;
+  },
+});
+
+export const getAllBlogs = query({
+  args: {},
+  handler: async (ctx) => {
+    const blogs = ctx.db.query("blogs").order("desc").collect();
+
+    return blogs;
+  },
+});
